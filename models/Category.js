@@ -6,11 +6,11 @@ class Category extends Model { }
 
 Category.init(
   {  // defined columns in relation to seeds-data
-    id: { //will not see, cannot be null error. 
+    id: { 
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncremenent: true
+      autoIncrement: true
     },
     category_name: {
       type: DataTypes.STRING,
