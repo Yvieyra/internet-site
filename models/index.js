@@ -33,3 +33,19 @@ module.exports = {
   Tag,
   ProductTag,
 };
+
+// Product.belongsToMany(Tag, {
+//   through: {
+//     model: ProductTag,
+//     unique: false
+//   },
+//   as: 'tagged_products'
+// });
+
+// Tag.belongsToMany(Product, {
+//   through: {
+//     model: ProductTag,
+//     unique: false,
+//   },
+//   as: 'product_tags'
+// });
