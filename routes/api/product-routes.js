@@ -3,7 +3,7 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 //`/api/products` endpoints
 // get all products, including its associated Category and Tag Data
-router.get('/', async (req, res) => { //cannot get a successful get 
+router.get('/', async (req, res) => {
   try {
     const productData = await Product.findAll({
       include: [
@@ -13,7 +13,6 @@ router.get('/', async (req, res) => { //cannot get a successful get
           through: ProductTag,
         },
       ],
-      // include: [{ model: Category, Tag, through: ProductTag, as: 'tagged_products' }]
     });
     console.log(productData);
     res.status(200).json(productData);
