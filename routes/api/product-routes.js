@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
           through: ProductTag,
         },
       ],
+      // include: [{ model: Category, Tag, through: ProductTag, as: 'tagged_products' }]
     });
     console.log(productData);
     res.status(200).json(productData);
