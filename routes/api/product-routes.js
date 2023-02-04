@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
 // be sure to include its associated Category and Tag data
 router.get('/:id', async (req, res) => {
   try {
-    const productData = await Product.findBtPk(req.params.id, {
+    const productData = await Product.findByPk(req.params.id, {
       include: [
         Category,
         {
@@ -42,6 +42,7 @@ router.get('/:id', async (req, res) => {
     }
     res.status(500).json(productData);
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
@@ -53,7 +54,7 @@ router.get('/:id', async (req, res) => {
 //     stock: 3,
 //     tagIds: [1, 2, 3, 4]
 //   }
-router.post('/', (req, res) => { //cannot make a successfull post 
+router.post('/', (req, res) => { //error in regards to line 62
   Product.create(req.body)
     .then((product) => {
       res.status(200).json(product);
@@ -123,11 +124,11 @@ router.put('/:id', async (req, res) => {
 });
 
 // delete one product by its `id` value
-router.delete('/:id', async (req, res) => { //cannot delete
+router.delete('/:id', async (req, res) => { //cannot delete (params is not defined)
   try {
-    const productData = await Product.destory(req.body, {
+    const productData = await Product.destroy({
       where: {
-        id: params.req.body.id,
+        id: req.params.id,
       }
     });
 
@@ -138,6 +139,7 @@ router.delete('/:id', async (req, res) => { //cannot delete
 
     res.status(200).json(productData);
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
