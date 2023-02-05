@@ -89,7 +89,7 @@ router.put('/:id', async (req, res) => { //updates, but receives error 'ERR_HTTP
       res.status(200).json(product);
       // find all associated tags from ProductTag
       return ProductTag.findAll({ where: { product_id: req.params.id } });
-      
+
     })
     .then((productTags) => {
       // get list of current tag_ids
@@ -123,7 +123,7 @@ router.put('/:id', async (req, res) => { //updates, but receives error 'ERR_HTTP
 });
 
 // delete one product by its `id` value
-router.delete('/:id', async (req, res) => { 
+router.delete('/:id', async (req, res) => {
   try {
     const productData = await Product.destroy({
       where: {
