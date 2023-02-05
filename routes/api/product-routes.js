@@ -14,7 +14,6 @@ router.get('/', async (req, res) => {
         },
       ],
     });
-    console.log(productData);
     res.status(200).json(productData);
   } catch (err) {
     console.log(err);
@@ -40,7 +39,7 @@ router.get('/:id', async (req, res) => {
       res.status(404).json({ message: 'No Product found with this id!' });
       return;
     }
-    res.status(500).json(productData);
+    res.status(200).json(productData);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -54,8 +53,8 @@ router.get('/:id', async (req, res) => {
 //     stock: 3,
 //     tagIds: [1, 2, 3, 4]
 //   }
-router.post('/', (req, res) => { //error in regards to line 62
-  Product.create(req.body)
+router.post('/', async (req, res) => { //updates, but receives error 'ERR_HTTP_HEADERS_SENT'
+  await Product.create(req.body)
     .then((product) => {
       res.status(200).json(product);
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
@@ -79,7 +78,7 @@ router.post('/', (req, res) => { //error in regards to line 62
 });
 
 // update product
-router.put('/:id', async (req, res) => {
+router.put('/:id', async (req, res) => { //updates, but receives error 'ERR_HTTP_HEADERS_SENT'
   // update product data
   await Product.update(req.body, {
     where: {
@@ -87,10 +86,10 @@ router.put('/:id', async (req, res) => {
     },
   })
     .then((product) => {
-      res.json(product);
+      res.status(200).json(product);
       // find all associated tags from ProductTag
       return ProductTag.findAll({ where: { product_id: req.params.id } });
-
+      
     })
     .then((productTags) => {
       // get list of current tag_ids
@@ -124,7 +123,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // delete one product by its `id` value
-router.delete('/:id', async (req, res) => { //cannot delete (params is not defined)
+router.delete('/:id', async (req, res) => { 
   try {
     const productData = await Product.destroy({
       where: {
