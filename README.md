@@ -24,5 +24,5 @@
 
  GitHub repository URL: https://github.com/Yvieyra/internet-site.git
 
- Walkthrough video link: 
+ Walkthrough video link: https://drive.google.com/file/d/1ymazEOOENe3i4HYjQMG0CnK4budcijPu/view
   
